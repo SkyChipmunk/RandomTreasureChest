@@ -14,6 +14,7 @@ class TimeBombTreasureChest: ITreasureChest {
         Bukkit.getScheduler().scheduleSyncRepeatingTask(RandomTreasureChest.inst, Runnable {
             if (player.getTime() > 10000) {
                 player.setTime()
+                world.createExplosion(location , 10f)
                 player.sendMessage("§c도망치세요 폭발 발동!")
                 Bukkit.getScheduler().cancelTasks(RandomTreasureChest.inst)
             }

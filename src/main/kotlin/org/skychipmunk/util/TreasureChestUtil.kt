@@ -12,30 +12,54 @@ import java.util.*
 
 private val random = Random()
 
-fun Entity.getTreasureChestRage() : Location {
-   return location.clone().add((random.nextInt(RAGE + RAGE) - RAGE).toDouble(), random.nextInt(RAGE * 2).toDouble(), (random.nextInt(RAGE + RAGE) - RAGE).toDouble())
+fun Entity.getTreasureChestRage(): Location {
+    return location.clone().add(
+        (random.nextInt(RAGE + RAGE) - RAGE).toDouble(),
+        random.nextInt(RAGE * 2).toDouble(),
+        (random.nextInt(RAGE + RAGE) - RAGE).toDouble()
+    )
 }
 
 fun Block.setTreasureChest(tc: ITreasureChest) {
-   setMetadata("TreasureChest" , FixedMetadataValue(RandomTreasureChest.inst , tc))
+    setMetadata("TreasureChest", FixedMetadataValue(RandomTreasureChest.inst, tc))
 }
 
 fun Block.getTreasureChest(): ITreasureChest {
-   return getMetadata("TreasureChest")[0].value() as ITreasureChest
+    return getMetadata("TreasureChest")[0].value() as ITreasureChest
 }
 
 fun Block.hasTreasureChest(): Boolean {
-   return hasMetadata("TreasureChest")
+    return hasMetadata("TreasureChest")
 }
 
 fun Player.getTime(): Long {
-   if (!hasMetadata("Time")) {
-      setTime()
-   }
-   return getMetadata("Time")[0].asLong()
+    if (!hasMetadata("Time")) {
+        setTime()
+    }
+    return getMetadata("Time")[0].asLong()
 }
 
 fun Player.setTime() {
-   setMetadata("Time" , FixedMetadataValue(RandomTreasureChest.inst, System.currentTimeMillis()))
+    setMetadata("Time", FixedMetadataValue(RandomTreasureChest.inst, System.currentTimeMillis()))
+
+}
+
+fun Block.closeChest() {
+    setMetadata("Close", FixedMetadataValue(RandomTreasureChest.inst, true))
+}
+
+fun Block.isCloseChest(): Boolean {
+    return hasMetadata("Close")
+}
+
+fun Block.openChest() {
+    setMetadata("Close", FixedMetadataValue(RandomTreasureChest.inst, false))
+}
+
+fun Block.getCloseChest(): Boolean {
+    if (!isCloseChest()) {
+        openChest()
+    }
+    return getMetadata("Close")[0].asBoolean()
 
 }
