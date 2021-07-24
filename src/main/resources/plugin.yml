@@ -1,0 +1,5 @@
+name: RandomTreasureChest
+version: unspecified
+main: org.skychipmunk.RandomTreasureChest
+api-version: 1.13
+description: Plugin file generated with Wolfradle
