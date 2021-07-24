@@ -22,7 +22,6 @@ class RandomTreasureChestTask : Runnable {
         }
         val idx = random.nextInt(locations.size)
         val block = locations[idx].block
-        println(treasureChestDatas[random.nextInt(treasureChestDatas.size)])
         block.type = Material.CHEST
         block.setTreasureChest(treasureChestDatas[random.nextInt(treasureChestDatas.size)])
         Bukkit.broadcastMessage("§a보물 상자가 생성되었습니다 좌표: ${block.location.x} , ${block.location.y} , ${block.location.z}")
